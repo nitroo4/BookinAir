@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\MICHAEL\\DOTNET\\BookingAPI\\BookingAPI.csproj": {}
+    "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj": {}
   },
   "projects": {
-    "C:\\MICHAEL\\DOTNET\\BookingAPI\\BookingAPI.csproj": {
+    "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\MICHAEL\\DOTNET\\BookingAPI\\BookingAPI.csproj",
+        "projectUniqueName": "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj",
         "projectName": "BookingAPI",
-        "projectPath": "C:\\MICHAEL\\DOTNET\\BookingAPI\\BookingAPI.csproj",
-        "packagesPath": "C:\\Users\\micka\\.nuget\\packages\\",
-        "outputPath": "C:\\MICHAEL\\DOTNET\\BookingAPI\\obj\\",
+        "projectPath": "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj",
+        "packagesPath": "C:\\Users\\antsa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\antsa\\Desktop\\BookinAir\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\micka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\antsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -51,6 +51,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[3.7.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.1.5, )"
             }
           },
           "imports": [
@@ -72,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
