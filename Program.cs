@@ -10,6 +10,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS pour autoriser BOOKINGMVC
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMvc", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:5000",
+                "https://localhost:5001",
+                "http://localhost:5047",
+                "https://localhost:7047"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // Configuration MongoDB
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
@@ -38,6 +54,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowMvc");
 
 app.UseAuthorization();
 
