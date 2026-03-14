@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BOOKINGAPI.Models;
 using BOOKINGAPI.Services;
+using BOOKINGAPI.DTOs;
 
 namespace BOOKINGAPI.Controllers;
 
@@ -18,7 +19,8 @@ public class BilletsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<Billet>>> GetAll()
     {
-        return await _service.GetAllAsync();
+        var billets = await _service.GetAllAsync();
+        return Ok(billets);
     }
 
     [HttpGet("{id}")]
@@ -27,9 +29,27 @@ public class BilletsController : ControllerBase
         var billet = await _service.GetByIdAsync(id);
 
         if (billet is null)
-            return NotFound();
+            return NotFound("Billet introuvable.");
 
-        return billet;
+        return Ok(billet);
+    }
+
+    [HttpGet("avec-destination")]
+    public async Task<ActionResult<List<BilletAvecDestinationDto>>> GetAllAvecDestination()
+    {
+        var billets = await _service.GetAllBilletsAvecDestinationAsync();
+        return Ok(billets);
+    }
+
+    [HttpGet("avec-destination/{id}")]
+    public async Task<ActionResult<BilletAvecDestinationDto>> GetAvecDestinationById(string id)
+    {
+        var billet = await _service.GetBilletAvecDestinationAsync(id);
+
+        if (billet is null)
+            return NotFound("Billet introuvable.");
+
+        return Ok(billet);
     }
 
     [HttpPost]
@@ -43,11 +63,13 @@ public class BilletsController : ControllerBase
     public async Task<IActionResult> Update(string id, Billet billet)
     {
         var existing = await _service.GetByIdAsync(id);
+
         if (existing is null)
-            return NotFound();
+            return NotFound("Billet introuvable.");
 
         billet.Id = id;
         await _service.UpdateAsync(id, billet);
+
         return NoContent();
     }
 
@@ -55,8 +77,9 @@ public class BilletsController : ControllerBase
     public async Task<IActionResult> Delete(string id)
     {
         var existing = await _service.GetByIdAsync(id);
+
         if (existing is null)
-            return NotFound();
+            return NotFound("Billet introuvable.");
 
         await _service.DeleteAsync(id);
         return NoContent();

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookingAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a30575d0bb32c5ef947ec626ab5b2dcae1c122e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+996b6cea2b6363b960278915ec683630c7cfc3f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookingAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookingAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
