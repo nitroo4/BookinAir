@@ -41,3 +41,4 @@ C:\Users\antsa\Desktop\BookinAir\obj\Debug\net10.0\ref\BookingAPI.dll
 C:\Users\antsa\Desktop\BookinAir\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\antsa\Desktop\BookinAir\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\antsa\Desktop\BookinAir\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\antsa\Desktop\BookinAir\bin\Debug\net10.0\BCrypt.Net-Next.dll

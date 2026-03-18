@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "oweGo/HKnRs=",
+  "dgSpecHash": "3C/lNsOTVNw=",
   "success": true,
   "projectFilePath": "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\antsa\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512",
     "C:\\Users\\antsa\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\antsa\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.1\\microsoft.aspnetcore.openapi.10.0.1.nupkg.sha512",
     "C:\\Users\\antsa\\.nuget\\packages\\microsoft.extensions.apidescription.server\\10.0.0\\microsoft.extensions.apidescription.server.10.0.0.nupkg.sha512",
