@@ -1,5 +1,9 @@
+using System.Text;
 using MongoDB.Driver;
 using BOOKINGAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using BOOKINGAPI.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,10 +45,38 @@ builder.Services.AddSingleton(sp =>
 });
 
 // Enregistrement des services
-builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<BilletService>();
-builder.Services.AddSingleton<DestinationService>();
-builder.Services.AddSingleton<ReservationService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<BilletService>();
+builder.Services.AddScoped<DestinationService>();
+builder.Services.AddScoped<ReservationService>();
+builder.Services.AddScoped<JwtService>();
+
+
+//GenerateKeyJwt
+var key = JwtKeyGenerator.GenerateKey();
+Console.WriteLine("JWT KEY:");
+Console.WriteLine(key);
+
+// Configuration JWT
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var jwtKey = jwtSettings["Key"];
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!))
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -57,6 +89,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowMvc");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapGet("/", () => "BOOKINGAPI marche bien");

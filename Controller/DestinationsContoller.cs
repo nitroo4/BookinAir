@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BOOKINGAPI.Models;
 using BOOKINGAPI.Services;
@@ -33,6 +34,7 @@ public class DestinationsController : ControllerBase
         return Ok(destination);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(Destination destination)
     {
@@ -40,6 +42,7 @@ public class DestinationsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = destination.Id }, destination);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(string id, Destination destination)
     {
@@ -54,6 +57,7 @@ public class DestinationsController : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {

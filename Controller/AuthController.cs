@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using BOOKINGAPI.DTos;
 using BOOKINGAPI.Models;
 using BOOKINGAPI.Services;
-using BCrypt.Net;
+using BOOKINGAPI.Enums;
 
 namespace BOOKINGAPI.Controllers;
 
@@ -11,18 +11,31 @@ namespace BOOKINGAPI.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly UserService _userService;
+    private readonly JwtService _jwtService;
 
-    public AuthController(UserService userService)
+    public AuthController(UserService userService, JwtService jwtService)
     {
         _userService = userService;
+        _jwtService = jwtService;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
+        dto.Email = dto.Email.Trim().ToLower();
+
+        if (string.IsNullOrWhiteSpace(dto.Nom) ||
+            string.IsNullOrWhiteSpace(dto.Email) ||
+            string.IsNullOrWhiteSpace(dto.Password))
+        {
+            return BadRequest(new { message = "Nom, email et mot de passe sont obligatoires." });
+        }
+
         var existingUser = await _userService.GetByEmailAsync(dto.Email);
         if (existingUser != null)
+        {
             return BadRequest(new { message = "Cet email existe déjà." });
+        }
 
         var user = new User
         {
@@ -30,7 +43,8 @@ public class AuthController : ControllerBase
             Email = dto.Email,
             Adresse = dto.Adresse,
             Numero = dto.Numero,
-            Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+            Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+            Role = UserRole.Client
         };
 
         await _userService.CreateAsync(user);
@@ -41,16 +55,30 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
+        dto.Email = dto.Email.Trim().ToLower();
+
+        if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+        {
+            return BadRequest(new { message = "Email et mot de passe sont obligatoires." });
+        }
+
         var user = await _userService.GetByEmailAsync(dto.Email);
         if (user == null)
+        {
             return Unauthorized(new { message = "Email ou mot de passe invalide." });
+        }
 
         bool passwordOk = BCrypt.Net.BCrypt.Verify(dto.Password, user.Password);
         if (!passwordOk)
+        {
             return Unauthorized(new { message = "Email ou mot de passe invalide." });
+        }
+
+        var token = _jwtService.GenerateToken(user);
 
         var response = new AuthResponseDto
         {
+            Token = token,
             Id = user.Id,
             Nom = user.Nom,
             Email = user.Email,
