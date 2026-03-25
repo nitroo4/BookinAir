@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj": {}
+    "C:\\MICHAEL\\DOTNET\\projet\\BookinAir\\BookingAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj": {
+    "C:\\MICHAEL\\DOTNET\\projet\\BookinAir\\BookingAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj",
+        "projectUniqueName": "C:\\MICHAEL\\DOTNET\\projet\\BookinAir\\BookingAPI.csproj",
         "projectName": "BookingAPI",
-        "projectPath": "C:\\Users\\antsa\\Desktop\\BookinAir\\BookingAPI.csproj",
-        "packagesPath": "C:\\Users\\antsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\antsa\\Desktop\\BookinAir\\obj\\",
+        "projectPath": "C:\\MICHAEL\\DOTNET\\projet\\BookinAir\\BookingAPI.csproj",
+        "packagesPath": "C:\\Users\\micka\\.nuget\\packages\\",
+        "outputPath": "C:\\MICHAEL\\DOTNET\\projet\\BookinAir\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\antsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\micka\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.1, )"
@@ -80,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

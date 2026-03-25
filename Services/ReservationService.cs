@@ -19,6 +19,9 @@ public class ReservationService
     public async Task<List<Reservation>> GetAllAsync() =>
         await _reservations.Find(_ => true).ToListAsync();
 
+    public async Task<List<Reservation>> GetByUserIdAsync(string userId) =>
+        await _reservations.Find(r => r.UserId == userId).ToListAsync();
+
     public async Task<Reservation?> GetByIdAsync(string id) =>
         await _reservations.Find(x => x.Id == id).FirstOrDefaultAsync();
 
