@@ -7,6 +7,7 @@ namespace BOOKINGAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+// [Authorize]
 public class DestinationsController : ControllerBase
 {
     private readonly DestinationService _service;

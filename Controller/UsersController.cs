@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using BOOKINGAPI.Models;
 using BOOKINGAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BOOKINGAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UsersController : ControllerBase
 {
     private readonly UserService _service;
@@ -52,6 +54,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(string id)
     {
         var existing = await _service.GetByIdAsync(id);

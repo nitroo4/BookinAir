@@ -74,6 +74,10 @@ public class AuthController : ControllerBase
             return Unauthorized(new { message = "Email ou mot de passe invalide." });
         }
 
+        // --- Mise à jour du statut ---
+        user.Status = UserStatus.Connecte;
+        await _userService.UpdateAsync(user.Id!, user);
+
         var token = _jwtService.GenerateToken(user);
 
         var response = new AuthResponseDto
@@ -84,7 +88,18 @@ public class AuthController : ControllerBase
             Email = user.Email,
             Role = user.Role.ToString()
         };
-
         return Ok(response);
+    }
+
+    [HttpPost("logout/{id}")]
+    public async Task<IActionResult> Logout(string id)
+    {
+        var user = await _userService.GetByIdAsync(id);
+        if (user == null) return NotFound();
+
+        user.Status = UserStatus.Deconnecte;
+        await _userService.UpdateAsync(user.Id!, user);
+
+        return Ok(new { message = "Utilisateur déconnecté." });
     }
 }
