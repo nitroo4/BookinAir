@@ -35,7 +35,7 @@ public class OtpService
     //ENVOI EMAIL GMAIL
     public void SendEmail(string toEmail, string code)
     {
-        var fromEmail = "mickarzk@gmail.com";
+        var fromEmail = "test@gmail.com";
         var password = "gzds uajd nkid hapd"; // mdp gmail pour stmp
 
         var smtp = new SmtpClient("smtp.gmail.com", 587)
