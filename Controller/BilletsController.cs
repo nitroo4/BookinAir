@@ -41,20 +41,15 @@ public class BilletsController : ControllerBase
         return Ok(billets);
     }
 
-    [HttpGet("avec-destination/{id}")]
-    public async Task<ActionResult<BilletAvecDestinationDto>> GetAvecDestinationById(string id)
-    {
-        var billet = await _service.GetBilletAvecDestinationAsync(id);
-
-        if (billet is null)
-            return NotFound("Billet introuvable.");
-
-        return Ok(billet);
-    }
-
     [HttpPost]
     public async Task<IActionResult> Create(Billet billet)
     {
+        var exists = await _service.ExistsByNumBilletAsync(billet.Num_Billet);
+
+        if (exists)
+        {
+            return BadRequest("Ce numéro de billet existe déjà.");
+        }
         await _service.CreateAsync(billet);
         return CreatedAtAction(nameof(GetById), new { id = billet.Id }, billet);
     }

@@ -50,7 +50,8 @@ builder.Services.AddScoped<BilletService>();
 builder.Services.AddScoped<DestinationService>();
 builder.Services.AddScoped<ReservationService>();
 builder.Services.AddScoped<JwtService>();
-
+builder.Services.AddScoped<ReservaService>();
+builder.Services.AddScoped<OtpService>();
 
 //GenerateKeyJwt
 var key = JwtKeyGenerator.GenerateKey();

@@ -12,11 +12,13 @@ public class AuthController : ControllerBase
 {
     private readonly UserService _userService;
     private readonly JwtService _jwtService;
+    private readonly OtpService _otpService;
 
-    public AuthController(UserService userService, JwtService jwtService)
+    public AuthController(UserService userService, JwtService jwtService, OtpService otpService)
     {
         _userService = userService;
         _jwtService = jwtService;
+        _otpService = otpService;
     }
 
     [HttpPost("register")]
@@ -55,12 +57,12 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
-        dto.Email = dto.Email.Trim().ToLower();
-
         if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
         {
             return BadRequest(new { message = "Email et mot de passe sont obligatoires." });
         }
+
+        dto.Email = dto.Email.Trim().ToLower();
 
         var user = await _userService.GetByEmailAsync(dto.Email);
         if (user == null)
@@ -74,21 +76,37 @@ public class AuthController : ControllerBase
             return Unauthorized(new { message = "Email ou mot de passe invalide." });
         }
 
-        // --- Mise à jour du statut ---
+        // 🔥 OTP UNIQUEMENT
+        var code = _otpService.GenerateOtp(user.Email);
+        _otpService.SendEmail(user.Email, code);
+
+        return Ok(new { message = "OTP envoyé à votre email." });
+    }
+
+    [HttpPost("verify-otp")]
+    public async Task<IActionResult> VerifyOtp([FromBody] VerifyOtpDto dto)
+    {
+        var valid = _otpService.VerifyOtp(dto.Email, dto.Code);
+
+        if (!valid)
+            return Unauthorized(new { message = "OTP invalide" });
+
+        var user = await _userService.GetByEmailAsync(dto.Email);
+
+        // ✅ connexion réelle ici
         user.Status = UserStatus.Connecte;
         await _userService.UpdateAsync(user.Id!, user);
 
         var token = _jwtService.GenerateToken(user);
 
-        var response = new AuthResponseDto
+        return Ok(new AuthResponseDto
         {
             Token = token,
             Id = user.Id,
             Nom = user.Nom,
             Email = user.Email,
             Role = user.Role.ToString()
-        };
-        return Ok(response);
+        });
     }
 
     [HttpPost("logout/{id}")]
