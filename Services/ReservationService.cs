@@ -2,20 +2,18 @@ using MongoDB.Driver;
 using BOOKINGAPI.Models;
 
 namespace BOOKINGAPI.Services;
-
 public class ReservationService
 {
     private readonly IMongoCollection<Reservation> _reservations;
     private readonly IMongoCollection<User> _users;
     private readonly IMongoCollection<Destination> _destinations;
-
     public ReservationService(IMongoDatabase database)
     {
         _reservations = database.GetCollection<Reservation>("Reservations");
         _users = database.GetCollection<User>("Users");
         _destinations = database.GetCollection<Destination>("Destinations");
     }
-
+    
     public async Task<List<Reservation>> GetAllAsync() =>
         await _reservations.Find(_ => true).ToListAsync();
 

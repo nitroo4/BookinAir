@@ -5,23 +5,19 @@ using BOOKINGAPI.Models;
 public class OtpService
 {
     private static List<OtpCode> _otps = new();
-
     public string GenerateOtp(string email)
     {
         var code = new Random().Next(100000, 999999).ToString();
 
         _otps.RemoveAll(x => x.Email == email);
-
         _otps.Add(new OtpCode
         {
             Email = email,
             Code = code,
             Expiration = DateTime.UtcNow.AddMinutes(5)
         });
-
         return code;
     }
-
     public bool VerifyOtp(string email, string code)
     {
         var otp = _otps.FirstOrDefault(x => x.Email == email);
@@ -32,8 +28,8 @@ public class OtpService
         return otp.Code == code;
     }
 
-    //ENVOI EMAIL GMAIL
-    public void SendEmail(string toEmail, string code)
+    //envoie du OTP
+   public void SendEmail(string toEmail, string code)
     {
         var fromEmail = "mickarzk@gmail.com";
         var password = "gzds uajd nkid hapd"; // mdp gmail pour stmp
@@ -49,7 +45,6 @@ public class OtpService
             Subject = "Votre code OTP",
             Body = $"Votre code OTP est : {code}"
         };
-
         smtp.Send(message);
     }
 }

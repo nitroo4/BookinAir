@@ -58,7 +58,6 @@ public class ReservationsController : ControllerBase
         if (string.IsNullOrEmpty(currentUserId))
             return Unauthorized("Utilisateur non authentifié.");
 
-        // Si c'est un client, on force son propre UserId
         if (currentUserRole == "Client")
         {
             reservation.UserId = currentUserId;
@@ -115,11 +114,9 @@ public class ReservationsController : ControllerBase
         if (string.IsNullOrEmpty(currentUserId))
             return Unauthorized("Utilisateur non authentifié.");
 
-        // Client : interdit de modifier la réservation d'un autre utilisateur
         if (currentUserRole == "Client" && existingReservation.UserId != currentUserId)
             return Forbid();
 
-        // Si client, on force son propre UserId
         if (currentUserRole == "Client")
         {
             reservation.UserId = currentUserId;
@@ -155,7 +152,6 @@ public class ReservationsController : ControllerBase
         if (string.IsNullOrEmpty(currentUserId))
             return Unauthorized("Utilisateur non authentifié.");
 
-        // Client : interdit de supprimer la réservation d'un autre utilisateur
         if (currentUserRole == "Client" && existingReservation.UserId != currentUserId)
             return Forbid();
 

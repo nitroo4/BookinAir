@@ -84,7 +84,19 @@ public class BilletService
                 Destination = destination
             });
         }
-
         return result;
+    }
+
+    //pour reduc de billet
+    public async Task<bool> AcheterBilletAsync(string billetId, int qty)
+    {
+        var update = Builders<Billet>.Update.Inc(x => x.Total_Billet, -qty);
+
+        var result = await _billets.UpdateOneAsync(
+            x => x.Id == billetId && x.Total_Billet >= qty,
+            update
+        );
+
+        return result.ModifiedCount > 0;
     }
 }

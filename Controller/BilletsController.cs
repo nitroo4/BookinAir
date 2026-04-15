@@ -10,7 +10,6 @@ namespace BOOKINGAPI.Controllers;
 public class BilletsController : ControllerBase
 {
     private readonly BilletService _service;
-
     public BilletsController(BilletService service)
     {
         _service = service;
@@ -30,7 +29,6 @@ public class BilletsController : ControllerBase
 
         if (billet is null)
             return NotFound("Billet introuvable.");
-
         return Ok(billet);
     }
 
@@ -64,7 +62,6 @@ public class BilletsController : ControllerBase
 
         billet.Id = id;
         await _service.UpdateAsync(id, billet);
-
         return NoContent();
     }
 
