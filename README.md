@@ -13,12 +13,15 @@ API DU PROJECT /
   -- Swashbuckle.AspNetCore                             10.1.7    10.1.7
  
 
-2: dois etre lance par:
-  - dotnet run ou dotnet watch run <br> ET dois aussi lance MongoDB pour la Base de donne: <br> avec netstart mongoDB 
+2: lance MongoDB pour la Base de donne:  
+  - net start mongoDB 
+
+3: dois etre lance par:
+  - dotnet run ou dotnet watch run <br>
 
 
-3: necessite connexion internet pour le login 
+4: necessite connexion internet pour le login 
 
-4: avant tester : Aller dans Services/OtpServices.cs  
+5: avant tester : Aller dans Services/OtpServices.cs  
   - trouver methode SendEmail (via cntrl + F)
   - modifier fromEmail et password (en votre emeil pour recevoir le otp et password: activer votre 2AF de votre email: et cree un mot de passe app "MAIL" chrome vous donnera le mot de pass a coller) 
