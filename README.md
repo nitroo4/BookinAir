@@ -2,15 +2,11 @@ API DU PROJECT /
 
 1: package necessaire : 
 
-   BCrypt.Net-Next                                    4.1.0     4.1.0 
-   
-   Microsoft.AspNetCore.Authentication.JwtBearer      10.0.5    10.0.5
-   
-   Microsoft.AspNetCore.OpenApi                       10.0.1    10.0.1
-   
-   MongoDB.Driver                                     3.7.0     3.7.0 
-   
-   Swashbuckle.AspNetCore                             10.1.7    10.1.7
+  -- BCrypt.Net-Next                                    4.1.0     4.1.0 
+  -- Microsoft.AspNetCore.Authentication.JwtBearer      10.0.5    10.0.5
+  -- Microsoft.AspNetCore.OpenApi                       10.0.1    10.0.1
+  -- MongoDB.Driver                                     3.7.0     3.7.0 
+  -- Swashbuckle.AspNetCore                             10.1.7    10.1.7
  
 
 2: dois etre lance par:  
