@@ -13,8 +13,9 @@ API DU PROJECT /
   -- Swashbuckle.AspNetCore                             10.1.7    10.1.7
  
 
-2: dois etre lance par:  
-  - dotnet run ou dotnet watch run 
+2: dois etre lance par:
+  - dotnet run ou dotnet watch run <br> ET dois aussi lance MongoDB pour la Base de donne: <br> avec netstart mongoDB 
+
 
 3: necessite connexion internet pour le login 
 
