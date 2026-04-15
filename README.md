@@ -1,8 +1,7 @@
 API DU PROJECT / 
 
 1: package necessaire : 
-  - [net10.0]: 
-   Package de niveau supérieur                          Demandé   Résolu
+
    > BCrypt.Net-Next                                    4.1.0     4.1.0 
    > Microsoft.AspNetCore.Authentication.JwtBearer      10.0.5    10.0.5
    > Microsoft.AspNetCore.OpenApi                       10.0.1    10.0.1
